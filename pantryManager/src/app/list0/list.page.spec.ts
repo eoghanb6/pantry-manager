@@ -5,7 +5,7 @@ import { List0Page } from './list0.page';
 
 describe('List0Page', () => {
   let component: List0Page;
-  let fixture: ComponentFixture<ListPage>;
+  let fixture: ComponentFixture<IngredientsPage>;
   let listPage: HTMLElement;
 
   beforeEach(async(() => {
