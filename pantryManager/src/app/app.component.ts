@@ -35,11 +35,6 @@ export class AppComponent {
       title: 'Register',
       url: '/register',
       icon: 'register'
-    },
-    {
-      title: 'Profile',
-      url: '/profile',
-      icon: 'profile'
     }
   ];
 

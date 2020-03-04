@@ -12,6 +12,7 @@ export class IngredientsPage implements OnInit {
 
   ingredientName: string
   ingredientQuantity: string
+  userIngredients
 
   private selectedItem: any;
 
