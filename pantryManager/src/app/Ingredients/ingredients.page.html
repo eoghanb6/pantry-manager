@@ -27,6 +27,7 @@
 
   <ion-list>
     <ion-item *ngFor="let ingred of (userIngredients | async)?.ingredients">
+<ion-button (click)= "removeIngredient(ingred)" color="danger">Remove</ion-button>
       <ion-icon slot="start"></ion-icon>
       {{ingred.ingredientName}}
       <div class="item-note" slot="end">

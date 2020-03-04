@@ -40,6 +40,21 @@ export class IngredientsPage implements OnInit {
         })
   }
 
+  async removeIngredient(ingred){
+    console.log("deleting Ingredient")
+    console.dir(ingred.ingredientName)
+    console.dir(ingred.ingredientQuantity)
+    const ingredientName =  ingred.ingredientName
+    const ingredientQuantity =  ingred.ingredientQuantity
+    //add ingredient to firestore here for this user
+   this.afstore.doc(`users/${this.user.getUID()}`).update({
+     ingredients: firestore.FieldValue.arrayRemove({
+      ingredientName,
+       ingredientQuantity
+     })
+   })
+  }
+
 
 
   ngOnInit() {
