@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore'
+import { UserService } from '../user.service'
+import { firestore } from 'firebase/app'
 
 @Component({
   selector: 'app-list',
@@ -6,28 +9,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['ingredients.page.scss']
 })
 export class IngredientsPage implements OnInit {
+
+  ingredientName: string = ""
+  ingredientQuantity: string = ""
+
   private selectedItem: any;
-  private icons = [
-    'flask',
-    'wifi',
-    'beer',
-    'football',
-    'basketball',
-    'paper-plane',
-    'american-football',
-    'boat',
-    'bluetooth',
-    'build'
-  ];
+
   public items: Array<{ title: string; note: string; icon: string }> = [];
-  constructor() {
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+  constructor(
+    public afstore: AngularFirestore,
+    public user: UserService
+  ) {
+
+  }
+
+   async addIngredient(){
+     console.log("adding ingredient to list")
+         const {ingredientName, ingredientQuantity } = this
+         //add ingredient to firestore here for this user
+        this.afstore.doc(`users/${this.user.getUID()}`).update({
+          ingredients: firestore.FieldValue.arrayUnion({
+            ingredientName,
+            ingredientQuantity
+          })
+        })
+
   }
 
   ngOnInit() {

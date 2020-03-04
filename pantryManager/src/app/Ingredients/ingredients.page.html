@@ -10,6 +10,21 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-item>
+    <ion-label position="floating">Ingredient Name</ion-label>
+    <ion-input type="text" [(ngModel)]="ingredientName" required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Quantity</ion-label>
+    <ion-input type="text" [(ngModel)]="ingredientQuantity" required></ion-input>
+  </ion-item>
+
+  <ion-button
+  (click)="addIngredient(ingredientName,ingredientQuantity)">Add Ingredient</ion-button>
+
+
+
   <ion-list>
     <ion-item *ngFor="let item of items">
       <ion-icon [name]="item.icon" slot="start"></ion-icon>
