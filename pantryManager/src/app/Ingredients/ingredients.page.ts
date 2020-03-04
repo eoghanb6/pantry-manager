@@ -10,22 +10,26 @@ import { firestore } from 'firebase/app'
 })
 export class IngredientsPage implements OnInit {
 
-  ingredientName: string = ""
-  ingredientQuantity: string = ""
+  ingredientName: string
+  ingredientQuantity: string
 
   private selectedItem: any;
+
 
   public items: Array<{ title: string; note: string; icon: string }> = [];
   constructor(
     public afstore: AngularFirestore,
     public user: UserService
   ) {
-
+    const ingreds = afstore.doc(`users/${user.getUID()}`)
+    this.userIngredients = ingreds.valueChanges()
   }
 
    async addIngredient(){
      console.log("adding ingredient to list")
-         const {ingredientName, ingredientQuantity } = this
+         const ingredientName = this.ingredientName
+         const ingredientQuantity = this.ingredientQuantity
+
          //add ingredient to firestore here for this user
         this.afstore.doc(`users/${this.user.getUID()}`).update({
           ingredients: firestore.FieldValue.arrayUnion({
@@ -33,8 +37,9 @@ export class IngredientsPage implements OnInit {
             ingredientQuantity
           })
         })
-
   }
+
+
 
   ngOnInit() {
   }
