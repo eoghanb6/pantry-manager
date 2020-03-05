@@ -13,8 +13,7 @@ import firebaseConfig   from './firebase';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { UserService } from './user.service';
-import { AngularFirestoreModule } from '@angular/fire/firestore'
-import { IonicModule } from 'ionic-angular';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 
 @NgModule({
@@ -27,7 +26,7 @@ import { IonicModule } from 'ionic-angular';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    IonicModule
+    IonicModule,
   ],
   providers: [
     StatusBar,

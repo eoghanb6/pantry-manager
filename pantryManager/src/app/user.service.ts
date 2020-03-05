@@ -33,4 +33,23 @@ export class UserService {
     }
   }
 
+  isLoggedIn(){
+    if (!this.user){
+      if(this.afAuth.auth.currentUser){
+        const user = this.afAuth.auth.currentUser
+        this.setUser({
+          username: user.email,
+          uid: user.uid
+        })
+        return true
+      }else {
+        return false
+      }
+    }else {
+      return true
+    }
+  }
+
+
+
 }
