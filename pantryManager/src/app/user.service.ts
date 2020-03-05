@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core'
 import { AngularFireAuth } from '@angular/fire/auth'
+import { first } from 'rxjs/operators'
+import { auth } from 'firebase/app'
+import { Router } from '@angular/router'
+import {AlertController} from '@ionic/angular'
+
+
 
 interface user {
 username: string,
@@ -10,7 +16,9 @@ uid: string
 export class UserService {
   private user: user
 
-  constructor(private afAuth: AngularFireAuth){}
+  constructor(private afAuth: AngularFireAuth,
+    public router: Router,
+  public alert: AlertController){}
 
   setUser(user: user){
     this.user = user
@@ -50,6 +58,22 @@ export class UserService {
     }
   }
 
+logOutUser(){
+this.afAuth.auth.signOut()
+console.log("logging out")
+this.showAlert("Success", "Logout Succesful")
+window.location.reload(true)
+this.router.navigate(['/login']);
+}
 
+async showAlert(header: string, message:string){
+  const alert = await this.alert.create({
+    header,
+    message,
+    buttons: ["Okay"]
+  })
+
+await alert.present()
+}
 
 }
