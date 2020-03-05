@@ -49,6 +49,13 @@ export class AppComponent {
       icon: 'register',
       showLoggedIn: "false",
       showLoggedOut: "true"
+    },
+    {
+      title: 'Forgot Password',
+      url: '/forgotpassword',
+      icon: 'forgotpassword',
+      showLoggedIn: "false",
+      showLoggedOut: "true"
     }
   ];
 
