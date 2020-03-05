@@ -25,14 +25,14 @@ export class AppComponent {
     {
       title: 'Ingredients',
       url: '/ingredients',
-      icon: 'list',
+      icon: 'pricetag',
       showLoggedIn: "true",
       showLoggedOut: "false"
     },
     {
       title: 'Recipes',
       url: '/recipes',
-      icon: 'recipes',
+      icon: 'school',
       showLoggedIn: "true",
       showLoggedOut: "false"
     },
