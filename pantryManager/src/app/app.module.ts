@@ -14,6 +14,10 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { UserService } from './user.service';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { SpoonacularService } from './spoonacular.service'
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 
 @NgModule({
@@ -27,12 +31,14 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AngularFireAuthModule,
     AngularFirestoreModule,
     IonicModule,
+    HttpClientModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     UserService,
+    SpoonacularService
   ],
   bootstrap: [AppComponent]
 })

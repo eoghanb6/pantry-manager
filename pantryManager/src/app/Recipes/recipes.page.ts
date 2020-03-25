@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore'
 import { UserService } from '../user.service'
 import { firestore } from 'firebase/app'
+//import { apiKey } from '../spoonacular'
+import { SpoonacularService } from '../spoonacular.service'
+
 
 @Component({
   selector: 'app-recipes',
@@ -13,50 +16,31 @@ export class RecipesPage implements OnInit {
   ingredientName: string
   ingredientQuantity: string
   userIngredients
-  ingredArr = []
-  ingredArr2 = []
+  ingredArr = [] //here is where a users ingredients are stored
+  information
 
-  private selectedItem: any;
-  private icons = [
-    'flask',
-    'wifi',
-    'beer',
-    'football',
-    'basketball',
-    'paper-plane',
-    'american-football',
-    'boat',
-    'bluetooth',
-    'build'
-  ];
-  public items: Array<{ title: string; note: string; icon: string }> = [];
-ingredArr = [];
   constructor(
     public afstore: AngularFirestore,
-    public user: UserService
+    public user: UserService,
+    public spoonacular: SpoonacularService
   ) {
     const ingreds = afstore.doc(`users/${user.getUID()}`)
     this.userIngredients = ingreds.valueChanges()
-
-    //this.userIngredients.subscribe(data => console.log(data) )
-    this.userIngredients.subscribe(data => {
+    console.log(this.userIngredients)
+    this.userIngredients.subscribe( data => {
         for (let ingredient of data.ingredients) {
           this.ingredArr.push(ingredient.ingredientName);
+
         }
-      } )
-      console.log(this.ingredArr)
-
-
-
-
-
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
+        this.spoonacular.searchRecipes(this.ingredArr).subscribe(result => {
+          this.information = result;
+          console.dir(this.information) //heres the response
       });
-    }
+      }
+
+    )
+
+
   }
 
   ngOnInit() {
