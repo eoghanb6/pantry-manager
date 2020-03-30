@@ -16,7 +16,7 @@ export class AccountPage implements OnInit {
   userIdentifier
   userEmail
 
-currentuser: AngularFirestoreDocument
+currentuser
 sub
 username: string
 profilePic: string

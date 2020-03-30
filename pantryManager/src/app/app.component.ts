@@ -30,6 +30,13 @@ export class AppComponent {
       showLoggedOut: "false"
     },
     {
+      title: 'Shopping List',
+      url: '/shopping-list',
+      icon: 'pricetag',
+      showLoggedIn: "true",
+      showLoggedOut: "false"
+    },
+    {
       title: 'Recipes',
       url: '/recipes',
       icon: 'school',

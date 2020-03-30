@@ -65,7 +65,7 @@ updateEmail(newemail: string) {
           username: user.email,
           uid: user.uid
         })
-        return user.username
+        return user.email
       }else {
         throw new Error("User not logged in")
       }

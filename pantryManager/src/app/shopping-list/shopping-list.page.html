@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      My Shopping List
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div id="addingredform" style="display:none">
+  <ion-item>
+    <ion-label position="floating">Ingredient Name</ion-label>
+    <ion-input type="text" [(ngModel)]="ingredientName" required></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Quantity</ion-label>
+    <ion-input type="text" [(ngModel)]="ingredientQuantity" required></ion-input>
+  </ion-item>
+
+  <ion-button
+  (click)="addIngredient(ingredientName,ingredientQuantity)">Add Ingredient</ion-button>
+</div>
+
+  <ion-list>
+    <ion-list-header>
+</ion-list-header>
+    <ion-item *ngFor="let ingred of (userIngredients | async)?.shoppingList">
+<ion-button (click)= "removeIngredient(ingred)" color="danger">Remove</ion-button>
+      <ion-icon slot="start"></ion-icon>
+      {{ingred.ingredientName}}
+      <div class="item-note">
+        : {{ingred.ingredientQuantity}}
+      </div>
+    </ion-item>
+  </ion-list>
+<ion-fab-button (click)="showForm()">+</ion-fab-button>
+  <!--
+    <div *ngIf="selectedItem" padding>
+      You navigated here from <b>{{selectedItem.title }}</b>
+    </div>
+  -->
+</ion-content>
