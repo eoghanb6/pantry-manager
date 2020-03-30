@@ -33,6 +33,10 @@
       <ion-img src="{{recipe.image}}"></ion-img>
       {{recipe.title}}
       <ion-button (click)= "viewRecipe(recipe.id)" color="success">View Recipe</ion-button>
+      <div class="item-note" slot="end">
+        used: {{recipe.usedIngredientCount}} / Missing: {{recipe.missedIngredientCount}}
+      </div>
+
     </ion-item>
   </ion-list>
 

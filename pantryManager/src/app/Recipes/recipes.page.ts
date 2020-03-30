@@ -51,10 +51,10 @@ export class RecipesPage implements OnInit {
       var address = this.informationMore["0"].sourceUrl //heres the url
 
         window.open(address, '_blank', 'location=no');
-
   });
-
   }
+
+
 
 
   ngOnInit() {

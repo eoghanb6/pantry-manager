@@ -24,10 +24,11 @@ export class SpoonacularService {
 
     console.dir(ingredients)
 
-    var ingredienstsString = ingredients.join("+");
-    var ingredienstsStringNoSpaces = ingredienstsString.split(' ').join('%20');
+    var ingredienstsString = ingredients.join(",");
+    var ingredienstsStringNoSpaces = ingredienstsString.split(' ').join(' ');
+    console.log(encodeURI(ingredienstsStringNoSpaces))
 
-    return this.http.get(`${this.url}${encodeURI(ingredienstsStringNoSpaces)}`, {
+    return this.http.get(`${this.url}${encodeURI(ingredienstsStringNoSpaces)}&ranking=1&number=5&ignorePantry=true`, {
       headers: {'x-rapidapi-host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
                 'x-rapidapi-key': '1718b3d3cemsh23389b72a93845fp119c22jsn13d1cf8e120a'
         }
@@ -35,7 +36,6 @@ export class SpoonacularService {
   }
 
   getRecipeURL(recipeID){
-
     console.dir(recipeID)
     return this.http.get(`${this.bulkUrl}${encodeURI(recipeID)}`, {
       headers: {'x-rapidapi-host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
