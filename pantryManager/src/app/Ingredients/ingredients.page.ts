@@ -13,11 +13,8 @@ export class IngredientsPage implements OnInit {
   ingredientName: string
   ingredientQuantity: string
   userIngredients
+  ingredientDate: string
 
-  private selectedItem: any;
-
-
-  public items: Array<{ title: string; note: string; icon: string }> = [];
   constructor(
     public afstore: AngularFirestore,
     public user: UserService
@@ -30,12 +27,14 @@ export class IngredientsPage implements OnInit {
      console.log("adding ingredient to list")
          const ingredientName = this.ingredientName
          const ingredientQuantity = this.ingredientQuantity
+         const ingredientDate = this.ingredientDate
 
          //add ingredient to firestore here for this user
         this.afstore.doc(`users/${this.user.getUID()}`).update({
           ingredients: firestore.FieldValue.arrayUnion({
             ingredientName,
-            ingredientQuantity
+            ingredientQuantity,
+            ingredientDate
           })
         })
   }
@@ -44,14 +43,27 @@ export class IngredientsPage implements OnInit {
     console.log("deleting Ingredient")
     const ingredientName =  ingred.ingredientName
     const ingredientQuantity =  ingred.ingredientQuantity
-    //add ingredient to firestore here for this user
+    const ingredientDate = ingred.ingredientDate
+
+    //remove to firestore here for this user
    this.afstore.doc(`users/${this.user.getUID()}`).update({
      ingredients: firestore.FieldValue.arrayRemove({
-      ingredientName,
-       ingredientQuantity
+       ingredientName,
+       ingredientQuantity,
+       ingredientDate
      })
    })
   }
+
+
+showForm() {
+  var x = document.getElementById("addingredform");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 
 
 

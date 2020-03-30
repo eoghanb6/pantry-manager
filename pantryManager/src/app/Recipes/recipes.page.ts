@@ -18,6 +18,8 @@ export class RecipesPage implements OnInit {
   userIngredients
   ingredArr = [] //here is where a users ingredients are stored
   information
+  informationMore
+
 
   constructor(
     public afstore: AngularFirestore,
@@ -39,9 +41,21 @@ export class RecipesPage implements OnInit {
       }
 
     )
+  }
 
+  async viewRecipe(recipeID){
+    console.log("VIEWING RECIPE")
+    this.spoonacular.getRecipeURL(recipeID).subscribe(result => {
+      this.informationMore = result;
+      console.dir(this.informationMore) //heres the bulk response
+      var address = this.informationMore["0"].sourceUrl //heres the url
+
+        window.open(address, '_blank', 'location=no');
+
+  });
 
   }
+
 
   ngOnInit() {
   }

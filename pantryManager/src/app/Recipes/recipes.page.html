@@ -32,6 +32,7 @@
       <ion-icon slot="start"></ion-icon>
       <ion-img src="{{recipe.image}}"></ion-img>
       {{recipe.title}}
+      <ion-button (click)= "viewRecipe(recipe.id)" color="success">View Recipe</ion-button>
     </ion-item>
   </ion-list>
 
