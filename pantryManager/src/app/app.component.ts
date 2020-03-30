@@ -37,6 +37,13 @@ export class AppComponent {
       showLoggedOut: "false"
     },
     {
+      title: 'Account',
+      url: '/account',
+      icon: 'account',
+      showLoggedIn: "true",
+      showLoggedOut: "false"
+    },
+    {
       title: 'Login',
       url: '/login',
       icon: 'login',

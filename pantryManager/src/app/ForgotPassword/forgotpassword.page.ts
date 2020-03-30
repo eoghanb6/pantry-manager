@@ -33,8 +33,8 @@ export class ForgotPasswordPage implements OnInit {
       console.log(res)
       this.showAlert("Success", "Email Sent")
           this.router.navigate(['/login']);
-
               }catch(err){
+      this.showAlert("Error", err.message)
     console.dir(err)
   }
 

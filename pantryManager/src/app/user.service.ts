@@ -24,6 +24,22 @@ export class UserService {
     this.user = user
   }
 
+  getUsername(): string {
+  return this.user.username
+}
+
+reAuth(username: string, password: string) {
+  return this.afAuth.auth.currentUser.reauthenticateWithCredential(auth.EmailAuthProvider.credential(username, password))
+}
+
+updatePassword(newpassword: string) {
+  return this.afAuth.auth.currentUser.updatePassword(newpassword)
+}
+
+updateEmail(newemail: string) {
+  return this.afAuth.auth.currentUser.updateEmail(newemail)
+}
+
   getUID(){
     if (!this.user){
       if(this.afAuth.auth.currentUser){
@@ -38,6 +54,23 @@ export class UserService {
       }
     }else {
       return this.user.uid
+    }
+  }
+
+  getEmail(){
+    if (!this.user){
+      if(this.afAuth.auth.currentUser){
+        const user = this.afAuth.auth.currentUser
+        this.setUser({
+          username: user.email,
+          uid: user.uid
+        })
+        return user.username
+      }else {
+        throw new Error("User not logged in")
+      }
+    }else {
+      return this.user.username
     }
   }
 
