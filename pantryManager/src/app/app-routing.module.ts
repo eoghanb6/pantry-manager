@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'index',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
@@ -12,12 +12,20 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
-    path: 'list',
-    loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
+    path: 'ingredients',
+    loadChildren: () => import('./Ingredients/ingredients.module').then(m => m.IngredientsPageModule)
   },
   {
-    path: 'list0',
-    loadChildren: () => import('./list0/list.module').then(m => m.List0PageModule)
+    path: 'shopping-list',
+    loadChildren: () => import('./shopping-list/shopping-list.module').then(m => m.ShoppingListPageModule)
+  },
+  {
+    path: 'recipes',
+    loadChildren: () => import('./Recipes/recipes.module').then(m => m.RecipesPageModule)
+  },
+  {
+    path: 'account',
+    loadChildren: () => import('./Account/account.module').then(m => m.AccountPageModule)
   },
   {
     path: 'login',
@@ -26,8 +34,13 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
-  }
-];
+  },
+  {
+    path: 'forgotpassword',
+    loadChildren: () => import('./ForgotPassword/forgotpassword.module').then(m => m.ForgotPasswordPageModule)
+  },
+]
+;
 
 @NgModule({
   imports: [

@@ -7,11 +7,11 @@ import { UserService } from '../user.service'
 
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-forgotpassword',
+  templateUrl: './forgotpassword.page.html',
+  styleUrls: ['./forgotpassword.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class ForgotPasswordPage implements OnInit {
 
   username: string = ""
   password: string = ""
@@ -25,28 +25,18 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  async login(){
-    const {username, password } = this
+  async reset(){
+    const {username } = this
     try{
-      const res = await this.afAuth.auth.signInWithEmailAndPassword(username, password)
-
+    console.dir("username: " + username)
+      const res = await this.afAuth.auth.sendPasswordResetEmail(username)
       console.log(res)
-      if(res.user) {
-        this.user.setUser({
-          username,
-          uid: res.user.uid
-        })
-      }
-
-      this.showAlert("Success", "Login Succesful")
-          this.router.navigate(['/home']);
-    }catch(err){
-      console.dir(err)
-      if (err.code == "auth/user-not-found"){
-        console.log("User not found")
-        this.showAlert("Error", err.message)
-      }
-    }
+      this.showAlert("Success", "Email Sent")
+          this.router.navigate(['/login']);
+              }catch(err){
+      this.showAlert("Error", err.message)
+    console.dir(err)
+  }
 
   }
 

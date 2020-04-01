@@ -12,6 +12,13 @@ import { AppRoutingModule } from './app-routing.module';
 import firebaseConfig   from './firebase';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { UserService } from './user.service';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { SpoonacularService } from './spoonacular.service'
+import { HttpClientModule } from '@angular/common/http';
+
+
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,12 +28,17 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    IonicModule,
+    HttpClientModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    UserService,
+    SpoonacularService
   ],
   bootstrap: [AppComponent]
 })

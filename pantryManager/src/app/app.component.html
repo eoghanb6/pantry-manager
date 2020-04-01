@@ -9,10 +9,18 @@
       <ion-content>
         <ion-list>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+            <ion-item *ngIf="(p.showLoggedOut==='true' && !user.isLoggedIn()) || (p.showLoggedIn==='true' && user.isLoggedIn()) " [routerDirection]="'root'" [routerLink]="[p.url]">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>
                 {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item *ngIf="(user.isLoggedIn())" (click)="user.logOutUser()" [routerDirection]="'root'" [routerLink]="['/home']">
+              <ion-icon slot="start"></ion-icon>
+              <ion-label>
+                Logout
               </ion-label>
             </ion-item>
           </ion-menu-toggle>

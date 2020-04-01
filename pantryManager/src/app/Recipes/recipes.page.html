@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      List
+      Recipes
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -24,4 +24,19 @@
       You navigated here from <b>{{selectedItem.title }}</b>
     </div>
   -->
+  <ion-list>
+    <ion-list-header>
+</ion-list-header>
+    <ion-item *ngFor="let recipe of (information)" (click)='viewRecipe(recipe.id)'>
+      <ion-thumbnail slot="start">
+        <img src="{{recipe.image}}">
+      </ion-thumbnail>
+      {{recipe.title}}
+      <div class="item-note" slot="end">
+        used: {{recipe.usedIngredientCount}} / Missing: {{recipe.missedIngredientCount}}
+      </div>
+
+    </ion-item>
+  </ion-list>
+
 </ion-content>
