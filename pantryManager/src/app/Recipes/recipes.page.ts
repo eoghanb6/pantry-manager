@@ -4,6 +4,8 @@ import { UserService } from '../user.service'
 import { firestore } from 'firebase/app'
 //import { apiKey } from '../spoonacular'
 import { SpoonacularService } from '../spoonacular.service'
+import { Inject } from '@angular/core';  
+import { DOCUMENT } from '@angular/common';
 
 
 @Component({
@@ -21,7 +23,7 @@ export class RecipesPage implements OnInit {
   informationMore
 
 
-  constructor(
+  constructor(@Inject(DOCUMENT) private document: Document,
     public afstore: AngularFirestore,
     public user: UserService,
     public spoonacular: SpoonacularService
@@ -49,8 +51,7 @@ export class RecipesPage implements OnInit {
       this.informationMore = result;
       console.dir(this.informationMore) //heres the bulk response
       var address = this.informationMore["0"].sourceUrl //heres the url
-
-        window.open(address, '_blank', 'location=no');
+      window.location.href = address;
   });
   }
 

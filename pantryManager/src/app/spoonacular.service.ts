@@ -28,7 +28,7 @@ export class SpoonacularService {
     var ingredienstsStringNoSpaces = ingredienstsString.split(' ').join(' ');
     console.log(encodeURI(ingredienstsStringNoSpaces))
 
-    return this.http.get(`${this.url}${encodeURI(ingredienstsStringNoSpaces)}&ranking=1&number=5&ignorePantry=true`, {
+    return this.http.get(`${this.url}${encodeURI(ingredienstsStringNoSpaces)}&ranking=1&number=10&ignorePantry=true`, {
       headers: {'x-rapidapi-host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
                 'x-rapidapi-key': '1718b3d3cemsh23389b72a93845fp119c22jsn13d1cf8e120a'
         }
