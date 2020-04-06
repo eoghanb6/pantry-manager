@@ -27,7 +27,7 @@
 <ion-item>
 Recipe Name
 <div class="item-note" slot="end">
-Have/Missing
+In Pantry
 </div>
 </ion-item>
     <ion-item *ngFor="let recipe of (information)">
@@ -37,7 +37,7 @@ Have/Missing
       {{recipe.title}}
       <div class="item-note" slot="end">
         <ion-button (click)='presentModal(recipe)'>
-        {{recipe.usedIngredientCount}}/{{recipe.missedIngredientCount}}
+        {{recipe.usedIngredientCount}}/{{recipe.missedIngredientCount+recipe.usedIngredientCount}}
         </ion-button>
       </div>
 
