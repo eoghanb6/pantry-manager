@@ -16,13 +16,16 @@ import { UserService } from './user.service';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { SpoonacularService } from './spoonacular.service'
 import { HttpClientModule } from '@angular/common/http';
+import { TooltipModule } from 'ng2-tooltip-directive';
+import { ModalPage } from './modal/modal.page';
+
 
 
 
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent,ModalPage],
+  entryComponents: [ModalPage],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -31,7 +34,8 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFireAuthModule,
     AngularFirestoreModule,
     IonicModule,
-    HttpClientModule
+    HttpClientModule,
+    TooltipModule
   ],
   providers: [
     StatusBar,

@@ -8,7 +8,6 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let item of items">
@@ -25,15 +24,21 @@
     </div>
   -->
   <ion-list>
-    <ion-list-header>
-</ion-list-header>
-    <ion-item *ngFor="let recipe of (information)" (click)='viewRecipe(recipe.id)'>
+<ion-item>
+Recipe Name
+<div class="item-note" slot="end">
+Have/Missing
+</div>
+</ion-item>
+    <ion-item *ngFor="let recipe of (information)">
       <ion-thumbnail slot="start">
-        <img src="{{recipe.image}}">
+        <img src="{{recipe.image}}" (click)='viewRecipe(recipe.id)'>
       </ion-thumbnail>
       {{recipe.title}}
       <div class="item-note" slot="end">
-        used: {{recipe.usedIngredientCount}} / Missing: {{recipe.missedIngredientCount}}
+        <ion-button (click)='presentModal(recipe)'>
+        {{recipe.usedIngredientCount}}/{{recipe.missedIngredientCount}}
+        </ion-button>
       </div>
 
     </ion-item>
