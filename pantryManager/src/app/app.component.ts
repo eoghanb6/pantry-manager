@@ -13,7 +13,7 @@ import { HomePage } from './home/home.page';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-
+rootPage:any = 'HomePage';
 
   public appPages = [
     {
@@ -83,7 +83,6 @@ export class AppComponent {
 
   ) {
     this.initializeApp();
-    this.rootPage = HomePage
   }
 
   initializeApp() {
