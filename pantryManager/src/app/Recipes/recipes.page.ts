@@ -65,7 +65,8 @@ export class RecipesPage implements OnInit {
       this.informationMore = result;
       console.dir(this.informationMore) //heres the bulk response
       var address = this.informationMore["0"].sourceUrl //heres the url
-      window.location.href = address;
+      //window.location.href = address; this is for same tab
+      window.open(address,'_blank' ); //this is new tab
   });
   }
 

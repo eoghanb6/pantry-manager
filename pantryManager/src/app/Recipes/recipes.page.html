@@ -25,7 +25,9 @@ In Pantry
       <ion-thumbnail slot="start">
         <img src="{{recipe.image}}" (click)='viewRecipe(recipe.id)'>
       </ion-thumbnail>
+      <div (click)='viewRecipe(recipe.id)'>
       {{recipe.title}}
+      </div>
       <div class="item-note" slot="end">
         <ion-button (click)='presentModal(recipe)'>
         {{recipe.usedIngredientCount}}/{{recipe.missedIngredientCount+recipe.usedIngredientCount}}
