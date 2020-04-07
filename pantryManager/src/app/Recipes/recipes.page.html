@@ -9,21 +9,12 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
-      <div class="item-note" slot="end">
-        {{item.note}}
-      </div>
-    </ion-item>
-  </ion-list>
   <!--
     <div *ngIf="selectedItem" padding>
       You navigated here from <b>{{selectedItem.title }}</b>
     </div>
   -->
-  <ion-list>
+  <ion-list *ngIf="information?.length > 0" >
 <ion-item>
 Recipe Name
 <div class="item-note" slot="end">
@@ -43,5 +34,11 @@ In Pantry
 
     </ion-item>
   </ion-list>
+
+  <div *ngIf="information?.length < 1" style="height: 100%; display: flex; align-items: center; justify-content: center;">
+      <img src="/assets/emptypantry.png" alt="" style="  height: 20%;" />
+      <br>
+      Better stock up
+    </div>
 
 </ion-content>

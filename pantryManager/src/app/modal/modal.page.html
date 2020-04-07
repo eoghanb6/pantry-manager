@@ -14,10 +14,7 @@
   <ion-thumbnail slot="start">
     <img src="{{ingred.image}}">
   </ion-thumbnail>
-{{ingred.name}}
-<div class="item-note" slot="end">
-  {{ingred.amount + " "}} {{ingred.unit}}
-</div>
+{{ingred.name}} ({{ingred.amount + " "}} {{ingred.unit}})
 </ion-item>
 </ion-list>
 
@@ -29,10 +26,10 @@
   <ion-thumbnail slot="start">
     <img src="{{ingred.image}}">
   </ion-thumbnail>
-{{ingred.name}}
-<div class="item-note" slot="end">
-  {{ingred.amount + " "}} {{ingred.unit}}
-</div>
+  {{ingred.name}} ({{ingred.amount + " "}} {{ingred.unit}})
+  <div *ngIf="!inShoppingList(ingred.name)" class="item-note" slot="end">
+    <ion-button (click)='addToList(ingred.name,ingred.amount,ingred.unit)'>Add to List</ion-button>
+  </div>
 </ion-item>
 </ion-list>
 
