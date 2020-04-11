@@ -1,23 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
-import { LoginPage } from './login.page';
+import { IonicModule } from '@ionic/angular';
+
+import { ModalPage } from './modal.page';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: ModalPage
+  }
+];
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: LoginPage
-      }
-    ])
+    RouterModule.forChild(routes)
   ],
-  declarations: [LoginPage]
+  declarations: [ModalPage]
 })
-export class LoginPageModule {}
+export class ModalPageModule {}

@@ -7,12 +7,21 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
+import { of } from 'rxjs';
+import { UserService } from './user.service'
 
 describe('AppComponent', () => {
 
   let statusBarSpy, splashScreenSpy, platformReadySpy, platformSpy;
+    let userServiceStub: any;
 
   beforeEach(async(() => {
+
+    userServiceStub = {
+      getUID: () => of('12345689'),
+      isLoggedIn: () => of(true),
+    };
+
     statusBarSpy = jasmine.createSpyObj('StatusBar', ['styleDefault']);
     splashScreenSpy = jasmine.createSpyObj('SplashScreen', ['hide']);
     platformReadySpy = Promise.resolve();
@@ -25,6 +34,7 @@ describe('AppComponent', () => {
         { provide: StatusBar, useValue: statusBarSpy },
         { provide: SplashScreen, useValue: splashScreenSpy },
         { provide: Platform, useValue: platformSpy },
+        { provide: UserService, useValue: userServiceStub },
       ],
       imports: [ RouterTestingModule.withRoutes([])],
     }).compileComponents();
@@ -49,9 +59,13 @@ describe('AppComponent', () => {
     await fixture.detectChanges();
     const app = fixture.nativeElement;
     const menuItems = app.querySelectorAll('ion-label');
-    expect(menuItems.length).toEqual(2);
+    expect(menuItems.length).toEqual(6);
     expect(menuItems[0].textContent).toContain('Home');
     expect(menuItems[1].textContent).toContain('Ingredients');
+    expect(menuItems[2].textContent).toContain('Shopping List');
+    expect(menuItems[3].textContent).toContain('Recipes');
+    expect(menuItems[4].textContent).toContain('Account');
+    expect(menuItems[5].textContent).toContain('Logout');
   });
 
   it('should have urls', async () => {
@@ -59,9 +73,13 @@ describe('AppComponent', () => {
     await fixture.detectChanges();
     const app = fixture.nativeElement;
     const menuItems = app.querySelectorAll('ion-item');
-    expect(menuItems.length).toEqual(2);
-    expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual('/home');
-    expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/ingredients');
+    expect(menuItems.length).toEqual(6);
+    expect(menuItems[0].textContent).toContain('Home');
+    expect(menuItems[1].textContent).toContain('Ingredients');
+    expect(menuItems[2].textContent).toContain('Shopping List');
+    expect(menuItems[3].textContent).toContain('Recipes');
+    expect(menuItems[4].textContent).toContain('Account');
+    expect(menuItems[5].textContent).toContain('Logout');
   });
 
 });

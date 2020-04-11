@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{recipeInfo.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<ion-list *ngIf="recipeInfo.usedIngredientCount>0">
+  <ion-list-header>
+  <ion-label>You have:</ion-label>
+</ion-list-header>
+<ion-item *ngFor="let ingred of (recipeInfo.usedIngredients)">
+  <ion-thumbnail slot="start">
+    <img src="{{ingred.image}}">
+  </ion-thumbnail>
+{{ingred.name}} ({{ingred.amount + " "}} {{ingred.unit}})
+</ion-item>
+</ion-list>
+
+<ion-list *ngIf="recipeInfo.missedIngredientCount>0">
+  <ion-list-header>
+  <ion-label>You do not have:</ion-label>
+</ion-list-header>
+<ion-item *ngFor="let ingred of (recipeInfo.missedIngredients)">
+  <ion-thumbnail slot="start">
+    <img src="{{ingred.image}}">
+  </ion-thumbnail>
+  {{ingred.name}} ({{ingred.amount + " "}} {{ingred.unit}})
+  <div *ngIf="!inShoppingList(ingred.name)" class="item-note" slot="end">
+    <ion-button (click)='addToList(ingred.name,ingred.amount,ingred.unit)'>Add to List</ion-button>
+  </div>
+</ion-item>
+</ion-list>
+
+<ion-button fill="solid" expand="block" (click) = "closeModal()">Close</ion-button>
+
+</ion-content>

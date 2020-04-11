@@ -4,8 +4,11 @@ import { UserService } from '../user.service'
 import { firestore } from 'firebase/app'
 //import { apiKey } from '../spoonacular'
 import { SpoonacularService } from '../spoonacular.service'
-import { Inject } from '@angular/core';  
+import { Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { ModalController } from '@ionic/angular';
+import { ModalPage } from '../modal/modal.page';
+
 
 
 @Component({
@@ -26,7 +29,8 @@ export class RecipesPage implements OnInit {
   constructor(@Inject(DOCUMENT) private document: Document,
     public afstore: AngularFirestore,
     public user: UserService,
-    public spoonacular: SpoonacularService
+    public spoonacular: SpoonacularService,
+    public modalController: ModalController
   ) {
     const ingreds = afstore.doc(`users/${user.getUID()}`)
     this.userIngredients = ingreds.valueChanges()
@@ -45,13 +49,24 @@ export class RecipesPage implements OnInit {
     )
   }
 
+  async presentModal(recipe) {
+  const modal = await this.modalController.create({
+    component: ModalPage,
+    componentProps: {
+  'recipeInfo': recipe
+}
+  });
+  return await modal.present();
+}
+
   async viewRecipe(recipeID){
     console.log("VIEWING RECIPE")
     this.spoonacular.getRecipeURL(recipeID).subscribe(result => {
       this.informationMore = result;
       console.dir(this.informationMore) //heres the bulk response
       var address = this.informationMore["0"].sourceUrl //heres the url
-      window.location.href = address;
+      //window.location.href = address; this is for same tab
+      window.open(address,'_blank' ); //this is new tab
   });
   }
 

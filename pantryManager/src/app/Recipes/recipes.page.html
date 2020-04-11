@@ -8,35 +8,39 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
-      <div class="item-note" slot="end">
-        {{item.note}}
-      </div>
-    </ion-item>
-  </ion-list>
   <!--
     <div *ngIf="selectedItem" padding>
       You navigated here from <b>{{selectedItem.title }}</b>
     </div>
   -->
-  <ion-list>
-    <ion-list-header>
-</ion-list-header>
-    <ion-item *ngFor="let recipe of (information)" (click)='viewRecipe(recipe.id)'>
+  <ion-list *ngIf="information?.length > 0" >
+<ion-item>
+Recipe Name
+<div class="item-note" slot="end">
+In Pantry
+</div>
+</ion-item>
+    <ion-item *ngFor="let recipe of (information)">
       <ion-thumbnail slot="start">
-        <img src="{{recipe.image}}">
+        <img src="{{recipe.image}}" (click)='viewRecipe(recipe.id)'>
       </ion-thumbnail>
+      <div (click)='viewRecipe(recipe.id)'>
       {{recipe.title}}
+      </div>
       <div class="item-note" slot="end">
-        used: {{recipe.usedIngredientCount}} / Missing: {{recipe.missedIngredientCount}}
+        <ion-button (click)='presentModal(recipe)'>
+        {{recipe.usedIngredientCount}}/{{recipe.missedIngredientCount+recipe.usedIngredientCount}}
+        </ion-button>
       </div>
 
     </ion-item>
   </ion-list>
+
+  <div *ngIf="information?.length < 1" style="height: 100%; display: flex; align-items: center; justify-content: center;">
+      <img src="/assets/emptypantry.png" alt="" style="  height: 20%;" />
+      <br>
+      Better stock up
+    </div>
 
 </ion-content>

@@ -33,6 +33,8 @@ export class ShoppingListPage implements OnInit {
                 ingredientQuantity
               })
             })
+            this.ingredientName ='';
+            this.ingredientQuantity='';
       }
 
       async removeIngredient(ingred){

@@ -37,6 +37,9 @@ export class IngredientsPage implements OnInit {
             ingredientDate
           })
         })
+        this.ingredientName ='';
+        this.ingredientQuantity='';
+        this.ingredientDate='';
   }
 
   async removeIngredient(ingred){
