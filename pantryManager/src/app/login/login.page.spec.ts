@@ -12,15 +12,18 @@ import { of } from 'rxjs';
 
 
 describe('LoginPage', () => {
+  //define variables
   let component: LoginPage;
   let fixture: ComponentFixture<LoginPage>;
   let afAuthStub: any;
   let userServiceStub: any;
 
   beforeEach(async(() => {
+    //mock angular fire auth to return dummy UID
     afAuthStub = {
       getUID: () => of('12345689'),
     };
+    //mock user service to return dummy UID
     userServiceStub = {
       getUID: () => of('12345689'),
     };
@@ -31,6 +34,7 @@ RouterTestingModule],
       declarations: [ LoginPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
+        //use mocks instead of live services
     { provide: AngularFireAuth, useValue: afAuthStub },
     { provide: UserService, useValue: userServiceStub },
 ]

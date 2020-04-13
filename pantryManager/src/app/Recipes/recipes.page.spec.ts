@@ -8,6 +8,7 @@ import { UserService } from '../user.service'
 import { SpoonacularService } from '../spoonacular.service'
 
 describe('RecipesPage', () => {
+  //define test variables
   let component: RecipesPage;
   let fixture: ComponentFixture<RecipesPage>;
   let afStoreStub: any;
@@ -17,7 +18,7 @@ describe('RecipesPage', () => {
   let spy: jasmine.Spy;
 
   beforeEach(async(() => {
-
+//mock angular firetore
     const afStoreStub = {
       doc() {
         return {
@@ -27,9 +28,11 @@ describe('RecipesPage', () => {
         };
       }
     };
+    //mock user service
 userServiceStub = {
   getUID: () => of('12345689'),
 };
+//mock spoonacular recipe service
 spoonacularServiceStub = {
   searchRecipes: () => of({recipes: ['recipe1', 'recipe2']}),
 };

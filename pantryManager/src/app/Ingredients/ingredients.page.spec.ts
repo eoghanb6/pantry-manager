@@ -7,13 +7,14 @@ import { UserService } from '../user.service'
 
 
 describe('IngredientsPage', () => {
+  //define variables
   let component: IngredientsPage;
   let fixture: ComponentFixture<IngredientsPage>;
   let afStoreStub: any;
   let userServiceStub: any;
 
   beforeEach(async(() => {
-
+    //mock angular firestore
     const afStoreStub = {
       doc() {
         return {
@@ -23,6 +24,7 @@ describe('IngredientsPage', () => {
         };
       }
     };
+    //mock user service
     userServiceStub = {
       getUID: () => of('12345689'),
     };

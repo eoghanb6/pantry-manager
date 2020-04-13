@@ -12,6 +12,7 @@ import { UserService } from '../user.service'
 
 
 describe('ModalPage', () => {
+  //define variables
   let component: ModalPage;
   let fixture: ComponentFixture<ModalPage>;
   let modalControllerStub: any;
@@ -21,12 +22,14 @@ describe('ModalPage', () => {
 
 
   beforeEach(async(() => {
-
+    //mock modal controller
     modalControllerStub = {
     };
+    // nav params are into modal page, mock them here
     navParamsStub = {
         get: () => of({recipeInfo: ['url', 'units']}),
     };
+    //mock angular firestore
     const afStoreStub = {
       doc() {
         return {
@@ -36,6 +39,7 @@ describe('ModalPage', () => {
         };
       }
     };
+    //mock user service
     userServiceStub = {
       getUID: () => of('12345689'),
     };
@@ -45,6 +49,7 @@ describe('ModalPage', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [RouterTestingModule],
       providers: [
+        //use mocks instead of live services
         { provide: ModalController, useValue: modalControllerStub },
         { provide: NavParams, useValue: navParamsStub },
         { provide: AngularFirestore, useValue: afStoreStub },

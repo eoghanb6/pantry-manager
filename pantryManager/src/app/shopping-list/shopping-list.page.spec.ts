@@ -7,13 +7,14 @@ import { UserService } from '../user.service'
 
 
 describe('ShoppingListPage', () => {
+  //define variables
   let component: ShoppingListPage;
   let fixture: ComponentFixture<ShoppingListPage>;
   let afStoreStub: any;
   let userServiceStub: any;
 
   beforeEach(async(() => {
-
+//mock angularfirestore
      afStoreStub = {
       doc() {
         return {
@@ -23,6 +24,7 @@ describe('ShoppingListPage', () => {
         };
       }
     };
+    //mock userservice
     userServiceStub = {
       getUID: () => of('12345689'),
     };
@@ -30,7 +32,9 @@ describe('ShoppingListPage', () => {
     TestBed.configureTestingModule({
       declarations: [ ShoppingListPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [{ provide: AngularFirestore, useValue: afStoreStub },
+      providers: [
+        //use mocked data instead of live services in provider
+        { provide: AngularFirestore, useValue: afStoreStub },
         { provide: UserService, useValue: userServiceStub }
       ]
     })
