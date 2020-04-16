@@ -9,7 +9,7 @@ import { firestore } from 'firebase/app'
   styleUrls: ['ingredients.page.scss']
 })
 export class IngredientsPage implements OnInit {
-
+//define variables
   ingredientName: string
   ingredientQuantity: string
   userIngredients
@@ -19,7 +19,9 @@ export class IngredientsPage implements OnInit {
     public afstore: AngularFirestore,
     public user: UserService
   ) {
+    //get list of ingredients from user on angular firestore
     const ingreds = afstore.doc(`users/${user.getUID()}`)
+    // update variable when value changes on remote
     this.userIngredients = ingreds.valueChanges()
   }
 
@@ -41,7 +43,7 @@ export class IngredientsPage implements OnInit {
         this.ingredientQuantity='';
         this.ingredientDate='';
   }
-
+//method to remove an ingredient from angular firestore
   async removeIngredient(ingred){
     console.log("deleting Ingredient")
     const ingredientName =  ingred.ingredientName
@@ -58,7 +60,7 @@ export class IngredientsPage implements OnInit {
    })
   }
 
-
+//method to show/hide the hidden view for adding ingredients
 showForm() {
   var x = document.getElementById("addingredform");
   if (x.style.display === "none") {

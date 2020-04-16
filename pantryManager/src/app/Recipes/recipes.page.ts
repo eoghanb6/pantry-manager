@@ -17,7 +17,7 @@ import { ModalPage } from '../modal/modal.page';
   styleUrls: ['recipes.page.scss']
 })
 export class RecipesPage implements OnInit {
-
+  //define variables
   ingredientName: string
   ingredientQuantity: string
   userIngredients
@@ -32,40 +32,41 @@ export class RecipesPage implements OnInit {
     public spoonacular: SpoonacularService,
     public modalController: ModalController
   ) {
+    //get list of ingredients for user from firebase
     const ingreds = afstore.doc(`users/${user.getUID()}`)
+    //update users ingredients locally if remote changes
     this.userIngredients = ingreds.valueChanges()
-    console.log(this.userIngredients)
+    //for each remote ingredient, add to a local array and keep updated
     this.userIngredients.subscribe( data => {
         for (let ingredient of data.ingredients) {
           this.ingredArr.push(ingredient.ingredientName);
 
         }
+        //search recipes based on local version of users ingredient list
         this.spoonacular.searchRecipes(this.ingredArr).subscribe(result => {
-          this.information = result;
-          console.dir(this.information) //heres the response
+          this.information = result;//heres the response
       });
       }
 
     )
   }
-
+//method to call the modal window and pass through navparams as recipeInfo
   async presentModal(recipe) {
   const modal = await this.modalController.create({
     component: ModalPage,
     componentProps: {
-  'recipeInfo': recipe
+  'recipeInfo': recipe //this will be picked up in modal.page.ts
 }
   });
   return await modal.present();
 }
-
+//method to view a recipe on click
   async viewRecipe(recipeID){
     console.log("VIEWING RECIPE")
+    //pass through recipe ID into spoonacular service and retrieve URL
     this.spoonacular.getRecipeURL(recipeID).subscribe(result => {
       this.informationMore = result;
-      console.dir(this.informationMore) //heres the bulk response
       var address = this.informationMore["0"].sourceUrl //heres the url
-      //window.location.href = address; this is for same tab
       window.open(address,'_blank' ); //this is new tab
   });
   }

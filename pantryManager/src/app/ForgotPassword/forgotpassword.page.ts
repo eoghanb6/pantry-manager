@@ -24,22 +24,23 @@ export class ForgotPasswordPage implements OnInit {
 
   ngOnInit() {
   }
-
+//reset method called
   async reset(){
     const {username } = this
     try{
-    console.dir("username: " + username)
+      //use angular fire auth to send password reset email
       const res = await this.afAuth.auth.sendPasswordResetEmail(username)
-      console.log(res)
       this.showAlert("Success", "Email Sent")
+      //redirect to login on sucess
           this.router.navigate(['/login']);
               }catch(err){
+                //show error message on failure
       this.showAlert("Error", err.message)
-    console.dir(err)
+    console.dir(err) //log error message
   }
 
   }
-
+//create modal alert box
   async showAlert(header: string, message:string){
     const alert = await this.alert.create({
       header,

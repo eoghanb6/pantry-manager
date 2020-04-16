@@ -9,16 +9,17 @@ import { UserService } from '../user.service'
 
 
 import { ForgotPasswordPage } from './forgotpassword.page';
-
+//mock angular firestore
 const AngularFireMocks = {
     auth: of({ uid: 'ABC123' })
 };
-
+//mock UserService
 const UserServiceMocks = {
     setUser: of({ uid: 'ABC123' })
 };
 
 describe('ForgotPasswordPage', () => {
+  //declare variables
   let component: ForgotPasswordPage;
   let fixture: ComponentFixture<ForgotPasswordPage>;
 
@@ -29,6 +30,7 @@ describe('ForgotPasswordPage', () => {
 RouterTestingModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
           providers:  [
+            //use mocked services instead of real services
     { provide: AngularFireAuth, useValue: AngularFireMocks },
     { provide: UserService, useValue: UserServiceMocks }
 ]

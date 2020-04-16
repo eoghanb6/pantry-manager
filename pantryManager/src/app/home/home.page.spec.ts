@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { HomePage } from './home.page';
 
 describe('HomePage', () => {
+  //define variables
   let component: HomePage;
   let fixture: ComponentFixture<HomePage>;
 

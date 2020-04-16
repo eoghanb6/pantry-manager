@@ -10,12 +10,14 @@ import { of } from 'rxjs';
 
 
 describe('AccountPage', () => {
+  //declare variables
   let component: AccountPage;
   let fixture: ComponentFixture<AccountPage>;
   let afStoreStub: any;
   let userServiceStub: any;
 
   beforeEach(async(() => {
+    //mock angular firestore
     const afStoreStub = {
       doc() {
         return {
@@ -25,6 +27,7 @@ describe('AccountPage', () => {
         };
       }
     };
+    //mock user service
     userServiceStub = {
       getUID: () => of('12345689'),
       getEmail: () => of('test1@test.com'),
@@ -36,6 +39,7 @@ describe('AccountPage', () => {
       declarations: [ AccountPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
+        // use mocks instead of live services
     { provide: AngularFirestore, useValue: afStoreStub },
     { provide: UserService, useValue: userServiceStub },
 ]

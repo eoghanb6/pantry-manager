@@ -8,13 +8,15 @@ import { Router } from '@angular/router'
 import { RouterTestingModule } from '@angular/router/testing';
 import { AngularFirestore } from '@angular/fire/firestore'
 import { UserService } from '../user.service'
-
+//mock angular fire auth
 const AngularFireMocks = {
     auth: of({ uid: 'ABC123' })
 };
+//mock angularfirestore
 const AngularFireStoreMocks = {
     doc: of({ uid: 'ABC123' })
 };
+//mock user service
 const UserServiceMocks = {
     setUser: of({ uid: 'ABC123' })
 };
@@ -30,6 +32,7 @@ RouterTestingModule],
       declarations: [ RegisterPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
+        //use mocks instead of live services
     { provide: AngularFireAuth, useValue: AngularFireMocks },
     { provide: AngularFirestore, useValue: AngularFireStoreMocks },
     { provide: UserService, useValue: UserServiceMocks }

@@ -31,15 +31,13 @@ busy: boolean = false
 		private router: Router,
 		private alertController: AlertController,
 		private user: UserService) {
-      this.currentuser = afstore.doc(`users/${user.getUID()}`)
+      this.currentuser = afstore.doc(`users/${user.getUID()}`) //get live user data from firebase based on cached user ID
+      //when user value changes on firebase update locally
   		this.sub = this.currentuser.valueChanges().subscribe(event => {
   			this.username = event.username
 })
       const userID = user.getUID()
       const userEmail = user.getEmail()
-      console.log(userID)
-      console.log(userEmail)
-
       this.userIdentifier = userID
       this.userEmail = userEmail
      }
@@ -48,7 +46,7 @@ busy: boolean = false
 
   ngOnInit() {
   }
-
+// async method do display modal alert box
 async presentAlert(title: string, content: string) {
   const alert = await this.alertController.create({
     header: title,
@@ -59,6 +57,7 @@ async presentAlert(title: string, content: string) {
   await alert.present()
 }
 
+//when called, update the user details on firebase
 async updateDetails() {
   this.busy = true
 
@@ -68,16 +67,17 @@ async updateDetails() {
   }
 
   try {
+    //try reauthenticate user with old set password
     await this.user.reAuth(this.user.getUsername(), this.password)
   } catch(error) {
     this.busy = false
     return this.presentAlert('Error!', 'Wrong password!')
   }
-
+//update password to new password
   if(this.newpassword) {
     await this.user.updatePassword(this.newpassword)
   }
-
+//update user email to new email address from form
   if(this.username !== this.user.getUsername()) {
     await this.user.updateEmail(this.username)
     this.currentuser.update({
@@ -90,7 +90,7 @@ async updateDetails() {
   this.busy = false
 
   await this.presentAlert('Done!', 'Your profile was updated!')
-
+//redirect user to home page
   this.router.navigate(['/home']);
 }
 

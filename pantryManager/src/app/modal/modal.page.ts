@@ -10,7 +10,7 @@ import { firestore } from 'firebase/app'
   styleUrls: ['./modal.page.scss'],
 })
 export class ModalPage implements OnInit {
-
+//define variables to be used
   recipeInfo
   userIngredients
   shoppingListArr = []
@@ -18,10 +18,13 @@ export class ModalPage implements OnInit {
   constructor(public modalController: ModalController,
   navParams: NavParams, public afstore: AngularFirestore,
         public user: UserService) {
-console.log(navParams.get('recipeInfo'));
+//get the navaparams passed in stored as recipeInfo from recipes page
 this.recipeInfo = navParams.get('recipeInfo');
+// store ingredients from users account on firebase
 const ingreds = afstore.doc(`users/${user.getUID()}`)
+//update users ingredients based on remote changes
 this.userIngredients = ingreds.valueChanges()
+//for each item in users remote shopping list, create a local array of these items
 this.userIngredients.subscribe( data => {
     for (let ingredient of data.shoppingList) {
       this.shoppingListArr.push(ingredient.ingredientName);
@@ -33,10 +36,10 @@ this.userIngredients.subscribe( data => {
   ngOnInit() {
   }
 
-
+//method called to close modal pop up window
 closeModal() { this.modalController.dismiss(); }
 
-
+//method to add igredient on button press to users remote shopping list
 addToList(name, amount, unit){
   console.log("adding ingredient to  shopping list")
       const ingredientName = name;
@@ -50,10 +53,9 @@ addToList(name, amount, unit){
        })
      })
 }
-
+//check if ingredient is present in the users shopping list by using array index
 inShoppingList(name){
   console.log("checking user ingredients")
-  console.log(this.shoppingListArr)
   return (this.shoppingListArr.indexOf(name) > -1);
 
 }
